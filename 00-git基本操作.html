@@ -1,0 +1,136 @@
+git 命令
+github 
+git 分支 (重点)
+分支 可多人协作开发 代码合并
+版本控制工具（软件）
+1.版本控制
+  
+本地  
+集中  所有版本都放在服务器中 svn
+分布式   git 客户端 是服务器的完整备份 即每台电脑上都保存所有版本
+
+1,什么是git
+
+svn 差异比较  每个版本存的是文件的变化的内容，而不是改变之后的文件
+切换版本的时候可能要等好久
+
+git  存的是更新后的文件  备份 （快照）
+
+git 提交 是在本地提交的 联网之后发到服务器
+
+git 三个区域
+ 工作区（正在写的代码）   暂存区              git仓库
+ 三种状态
+  已修改 （modified）   已暂存（staged）     已提交(committed)
+git 工作基本流程
+ 修改  暂存 提交到仓库
+
+2   git 基础
+   安装配置git  下载一路回车即可  右击空白处 有git选项即为安装成功
+    全局配置  一次永久生效
+   (2)配置用户信息  
+   用户名和邮件地址
+   git config --global user.name  '用户名'
+   git config --global user.email  '邮箱'
+   查看git的全局配置文件  可查看配置信息 在本地磁盘中C:/Users/用户名文件夹/.gitconfig
+   (4)获取全局配置信息  
+     git config --list --global
+      查看指定的全局配置项 
+     git config user.name
+     git config user.email
+    右击 git bash
+    (5)命令 获取帮助信息
+    git help  命令
+    如 git help config
+    或者  在终端中打开 命令的帮助信息
+    git config -h
+git基本操作
+  a, 获取git仓库的两种方式 1, 把本地目录让git仓库管理,转换为git仓库 2,网上拉一个git仓库
+  b, 创建本地仓库  .git    查看 文件扩展名 隐藏目录
+   git init
+   Initialized empty Git repository in
+
+   c,工作区中文件的4 种状态
+   未跟踪（untraket） 未修改(工作区与与仓库内容一致) 已修改 已暂存
+   
+  d, 检查 文件状态
+   git status
+   <!-- -s -short的简写 -->
+   git status-s 已精简的方式 显示文件状态
+   ??(红色的) 未跟踪
+
+
+  e , 跟踪新文件  即添加到仓库管理中
+   git add  文件名
+   git status-s 
+   A 绿色的 新添加到暂存区的文件
+   <!-- 在要操作的文件夹目录中右击打开 git bash here  clear -->
+
+   f,提交更新
+   git commit -m '提示信息'
+   提交到仓库  未修改的状态
+
+   g,对已提交的文件进行修改
+
+   再次运行 git status 和 git status-s
+   modified 已修改    M
+   文件已修改 但没有放在暂存区  是红色的 
+
+
+  h, 暂存已修改的文件
+   再次运行 git add   文件  加入到暂存区中
+
+  i ,提交已暂存的文件
+   git commit  -m '提示消息'
+
+ j , 撤销对文件的修改
+   把工作区对应的文件修改,还原程git仓库中保存的版本
+   git checkout -- 文件名
+   撤销对文件的修改  我们本来在修改 不想修改啦 ,撤销修改即可
+  k,向暂存区中一次性添加多个文件
+  git add .   将所有新增和修改后的文件加入到暂存区中
+
+  L 取消(移出)暂存区的文件 把暂存区中的文件移除出暂存区  放到工作区
+  git reset HEAD 文件名  
+<!-- (移出)暂存区的所有文件 -->
+  git reset HEAD .
+
+<!-- 提交到仓库 -->
+  git commit -m ''
+  m,跳过暂存区  
+  git 工作标准流程 git init   (新增和修改都要执行一下add添加到暂存区)git add . (添加到暂存区) git commit -m '提示信息' 提交到仓库
+  
+  跳过暂存区 所有已经跟踪过（add过的）的文件 直接把工作区中的存到 git仓库中 
+      git commit -a -m '提示消息'
+
+      -a跳过暂存区
+
+ n,移出文件 从git仓库中移出
+   1,git rm -f index.js//从git仓库和工作区都移除
+   2,git rm --cached index.css 从git仓库中移出,不再被跟踪,保留工作区中的
+   <!-- cacked 缓存 -->
+
+  O,git忽略文件 不提交到git仓库的文件
+  glob模式 简化的正则表达式
+
+  p 查看提交的历史
+  git log  查看所有
+  修改的内容较多 : 回车可查看折叠的修改历史信息
+         q 退出
+  <!-- 查看最近 2条提交历史 -->
+  git log -2
+  <!-- 一行展示 -->
+  git log -2 --pretty=oneline
+  <!-- 自定义输出的格式  哈希标识 作者  修改时间多久之前 提示说明-->
+  git log -2 --pretty="%h | %an | %ar | %s "  
+
+  Q, 回退到指定版本
+  <!-- 先打印出 历史版本 -->
+  git log -2 --pretty=oneline 
+  <!-- 根据唯一标识进行版本的回退 -->
+  git reset --hard  CommitID
+
+  <!-- 回退到低版本 再回到高版本  -->
+  git reflog --pretty=oneline
+  <!-- 版本设置 -->
+  git reset --hard  CommitID

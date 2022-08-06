@@ -1,0 +1,90 @@
+A,注册账号 singup  qq邮箱绑定
+B,新建空白的远程仓库
+登录 头像那 加号 输入名字 。。。
+C,访问远程仓库的两种方式
+  https  地址https开头 不用配置但是要输入用户名密码
+  ssh 需要进行额外的配置 以后不用输入用户名密码
+  推荐使用 ssh 方式访问远程仓库
+
+D,基于 HTTPS 将本地仓库上传到 Github
+  1,先在本地创建仓库 ，然后HTTPS 在本地项目中右键git bash here 执行三条命令 关联本地远程仓库 push本地仓库到远程仓库，输入用户名密码即可。
+  git remote add origin https://github.com/CGF123123cgf/firstProject_cgf.git
+  git branch -M main
+  解除SSL认证
+  git config --global http.sslVerify "false"
+  更新 DNS 缓存cmd 窗口输入
+  ipconfig /flushdns
+  文件过大，超过上限
+
+  修改为 500MB，在 Git Bash 中输入以下命令
+  git config http.postBuffer 5242880003
+
+  git push -u origin main
+  等一会儿会有弹窗。
+  不能使用密码啦 要使用token
+  如何生成token？按着网页指导走
+  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（90天的token）
+ 
+
+  
+
+
+<!-- 一些错误提示 $ git update-git-for-windows//更新git
+    我直接用如下代码把整个git config文件删掉了（反正已经空了）
+rm ~/.gitconfig 清除所有配置
+ -->
+
+  2 在设置那可以删除项目  
+  <!-- 本地git项目和远程仓库关联的两种方法
+  1，创建本地仓库和远程仓库 然后链接起来 
+  2，创建远程仓库直接克隆下拉。  这样省的初始化本地项目了 ，但是还是要add. commit 先添加到本地 然后 push到远程仓库
+-->
+E,了解push命令
+
+本地git仓库先添加add 到 提交 commit 
+然后直接 git push 把本地最新的代码发送都远程仓库中 
+只有第一次使用 git push -u origin main
+然后剩下的都是git push
+
+F,ssh key   
+  1,SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。
+  SSH key 的好处：免登录身份认证、数据加密传输。
+  SSH key 由两部分组成，分别是：
+  ① id_rsa（私钥文件，存放于客户端的电脑中即可）生成即可
+  ② id_rsa.pub（公钥文件，需要配置到 Github 中）要配置
+  2，生成ssh key 
+     a,打开git bash 输入命令ssh-keygen -t rsa -b 4096 -C "3269522603@qq.com"
+     b,连续敲击 3 次回车，即可在 C:\Users\用户名文件夹\.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件
+  3，配置ssh key 把公钥配置到github中
+  ① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容
+  ② 在浏览器中登录 Github，点击头像 -> Settings -> SSH and GPG Keys -> New SSH key
+  ③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中
+  ④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来
+  SSH
+  my key
+  SHA256:9dG+S1eeXwmRRN4VkLZ3ZhF7wJytgRzbH3+iANOWoBw 
+  4，检测github ssh key 是否配置成功
+  打开git bash  输入命令ssh -T git@github.com  然后输入yes 然后提示 hi sucessful
+  5,基于 ssh key将本地仓库上传到 Github
+   不用再输入密码账号
+  git 管理 本地项目 
+  git创建一个空白仓库 （本地仓库和远程仓库名字不一定一样）
+  两个命令 本地 git bash here
+  连接两个仓库 git remote add origin git@github.com:CGF123123cgf/project_02.git
+  把本地仓库中的东西push到远程仓库中即可  git push -u origin master
+G,
+将远程仓库克隆到本地
+打开 Git Bash，输入如下的命令并回车执行  git clone 项目地址
+  
+
+
+
+
+
+
+
+
+
+
+
+
